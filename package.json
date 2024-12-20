@@ -1,0 +1,40 @@
+{
+  "name": "presence-controller",
+  "version": "1.0.0",
+  "description": "Vodafone Station 6 WiFi Presence Controller",
+  "type": "module",
+  "main": "index.js",
+  "keywords": [
+    "vodafone",
+    "station",
+    "wifi",
+    "presence",
+    "controller",
+    "vodafone station 6"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "commit": "git add . && git-cz",
+    "version": "standard-version",
+    "push": "git push --follow-tags",
+    "release": "npm run commit && npm run version && npm run push"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "env-schema": "^6.0.0",
+    "puppeteer": "^23.11.1"
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "standard-version": "^9.3.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
