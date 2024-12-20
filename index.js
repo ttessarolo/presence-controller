@@ -95,5 +95,5 @@ async function getPresences(configOpts = {}) {
 
   return [presence, macs];
 }
-console.log(await getPresences());
+
 export default getPresences;
