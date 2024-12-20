@@ -28,7 +28,8 @@ const envConfig = envSchema({
       },
       PRESENCE_MAC_ADDRESSES: {
         type: "string",
-        separator: ","
+        separator: ",",
+        default: []
       }
     }
   },
@@ -92,7 +93,7 @@ async function getPresences(configOpts = {}) {
 
   await browser.close();
 
-  return presence;
+  return [presence, macs];
 }
-
+console.log(await getPresences());
 export default getPresences;
