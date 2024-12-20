@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://bitbucket.org/ttessarolo/presence-controller/branches/compare/v1.0.1%0Dv1.0.2) (2024-12-20)
+
+
+### Docs
+
+* updated Docs to reflect function array result ([010dcd2](https://github.com/ttessarolo/presence-controller/commits/010dcd26ae35b213607177469a404b59b62e30e3))
+
 ### 1.0.1 (2024-12-20)
 
 
