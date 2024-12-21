@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://bitbucket.org/ttessarolo/presence-controller/branches/compare/v1.0.3%0Dv1.0.4) (2024-12-21)
+
+
+### Others
+
+* library exports two function getMACs and getPresence + updated docs ([93dfeac](https://github.com/ttessarolo/presence-controller/commits/93dfeac324e6411506eb543567458b7443e8baa0))
+
 ### [1.0.3](https://bitbucket.org/ttessarolo/presence-controller/branches/compare/v1.0.2%0Dv1.0.3) (2024-12-20)
 
 
