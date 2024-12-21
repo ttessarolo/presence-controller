@@ -56,7 +56,7 @@ const checkOverviewPage = (config) => {
   }
 };
 
-async function getPresences(configOpts = {}) {
+export async function getMACs(configOpts = {}) {
   const config = { ...envConfig, ...configOpts };
 
   checkRequired(config);
@@ -84,8 +84,6 @@ async function getPresences(configOpts = {}) {
     ).filter(Boolean)
   );
 
-  const presence = config.PRESENCE_MAC_ADDRESSES.every((mac) => macs.has(mac));
-
   // Logout
   await page.evaluate(() => {
     document.querySelector("li:nth-child(3)").click();
@@ -93,7 +91,12 @@ async function getPresences(configOpts = {}) {
 
   await browser.close();
 
-  return [presence, macs];
+  return macs;
 }
 
-export default getPresences;
+export async function getPresences(configOpts = {}) {
+  const config = { ...envConfig, ...configOpts };
+  const macs = await getMACs(configOpts);
+  const presence = config.PRESENCE_MAC_ADDRESSES.every((mac) => macs.has(mac));
+  return presence;
+}

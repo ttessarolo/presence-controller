@@ -1,6 +1,16 @@
 # Presence Controller
 
-The `getPresences` function checks for the presence of specified MAC addresses among the devices connected to a WiFi router (Vodafone Station 6). This can be used in home automation to automate routines based on the actual presence of one or more individuals connected with their mobile phones to the home WiFi network.
+The `presence-controller` library provides two functions to interact with devices connected to a WiFi router (Vodafone Station 6). These functions can be used in home automation to automate routines based on the actual presence of one or more individuals connected with their mobile phones to the home WiFi network.
+
+## Functions
+
+### `getMACs`
+
+The `getMACs` function retrieves all MAC addresses of devices connected to the WiFi router.
+
+### `getPresences`
+
+The `getPresences` function checks for the presence of specified MAC addresses among the devices connected to the WiFi router.
 
 ## Usage
 
@@ -16,7 +26,7 @@ The following environment variables need to be set:
 
 ### Function Parameters
 
-Alternatively, you can pass the configuration as an object to the `getPresences` function:
+Alternatively, you can pass the configuration as an object to the functions:
 
 - `ROUTER_ADDRESS`: The address of the router.
 - `OVERVIEW_PAGE`: The overview page of the router (default: `/overview.html`).
@@ -24,10 +34,33 @@ Alternatively, you can pass the configuration as an object to the `getPresences`
 - `LOGIN_PASSWORD`: The password for logging into the router.
 - `PRESENCE_MAC_ADDRESSES`: A comma-separated list of MAC addresses to check for presence [OPTIONAL].
 
-## Example
+## Examples
+
+### `getMACs`
 
 ```javascript
-import getPresences from "presence-controller";
+import { getMACs } from "presence-controller";
+
+const config = {
+  ROUTER_ADDRESS: "192.168.1.1",
+  OVERVIEW_PAGE: "/overview.html",
+  LOGIN_USERNAME: "admin",
+  LOGIN_PASSWORD: "password"
+};
+
+getMACs(config)
+  .then((macs) => {
+    console.log(`Connected MAC addresses: ${Array.from(macs).join(", ")}`);
+  })
+  .catch((error) => {
+    console.error(`Error: ${error.message}`);
+  });
+```
+
+### `getPresences`
+
+```javascript
+import { getPresences } from "presence-controller";
 
 const config = {
   ROUTER_ADDRESS: "192.168.1.1",
@@ -37,40 +70,31 @@ const config = {
   PRESENCE_MAC_ADDRESSES: "00:11:22:33:44:55,66:77:88:99:AA:BB"
 };
 
-const [ familyIsAtHome ] = await getPresences(config);
-
-if(familyIsAtHome){
-    // Do something...
-} else {
-    // Start Cleaning Robot
-}
-
-// OR
-
 getPresences(config)
-  .then(([presence, macs]) => {
+  .then((presence) => {
     console.log(`Presence detected: ${presence}`);
-    console.log(`Connected MAC addresses: ${Array.from(macs).join(", ")}`);
-
-    if(macs.includes("00:11:22:33:44:55")){
-        console.log("Daddy is at home!")
-    }
   })
   .catch((error) => {
     console.error(`Error: ${error.message}`);
   });
+```
 
 ## Result
 
-The function returns a promise that resolves to an array. The first element is a boolean value indicating whether all specified MAC addresses are present among the connected devices. The second element is a set containing all the MAC addresses found among the connected devices.
+### `getMACs`
+
+The function returns a promise that resolves to a set containing all the MAC addresses found among the connected devices.
+
+### `getPresences`
+
+The function returns a promise that resolves to a boolean value indicating whether all specified MAC addresses are present among the connected devices.
 
 ## Applications
 
-This function can be used in home automation to automate routines based on the actual presence of one or more individuals connected with their mobile phones to the home WiFi network. For example, you can use it to:
+These functions can be used in home automation to automate routines based on the actual presence of one or more individuals connected with their mobile phones to the home WiFi network. For example, you can use them to:
 
 - Turn on lights when someone arrives home.
 - Adjust the thermostat based on who is present.
 - Enable or disable security systems.
 - Start automatic cleaning robots when no one is home.
 - Send notifications when specific individuals arrive or leave.
-```
